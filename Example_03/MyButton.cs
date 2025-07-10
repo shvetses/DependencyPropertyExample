@@ -10,7 +10,7 @@ namespace Example_03
         static MyButton()
         {
             MyButtonClickEvent = EventManager.RegisterRoutedEvent("MyButtonClick",
-                RoutingStrategy.Bubble,
+                RoutingStrategy.Direct,
                 typeof(RoutedEventHandler),
                 typeof(MyButton));
         }
@@ -20,6 +20,7 @@ namespace Example_03
             add { AddHandler(MyButtonClickEvent, value); }
             remove { RemoveHandler(MyButtonClickEvent, value); }
         }
+
         protected override void OnClick()
         {
             base.OnClick();
@@ -28,6 +29,5 @@ namespace Example_03
             // Вызов события. Событие, которое должно быть вызвано, определяется по параметрам объекта типа RoutedEventArgs
             RaiseEvent(args);
         }
-
     }
 }

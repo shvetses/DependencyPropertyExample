@@ -5,7 +5,9 @@ namespace Example_01
     class Person : DependencyObject
     {
         public static readonly DependencyProperty AgeProperty;
+
         private string name;
+        
 
         public string Name
         {
@@ -19,45 +21,41 @@ namespace Example_01
             set => SetValue(AgeProperty, value);
         }
 
-        public Person(string name, int age)
-        {
-            this.Name = name;
-            this.Age = age;
-        }
-
         static Person()
         {
-            AgeProperty = DependencyProperty.Register(
+            AgeProperty=DependencyProperty.Register(
                 nameof(Age),
                 typeof(int),
                 typeof(Person),
                 new FrameworkPropertyMetadata(
                     0,
-                    FrameworkPropertyMetadataOptions.AffectsMeasure |
+                    FrameworkPropertyMetadataOptions.AffectsMeasure|
                     FrameworkPropertyMetadataOptions.AffectsRender,
                     null,
-                    new CoerceValueCallback(CoerceAge)),
-                new ValidateValueCallback(ValidateAge));
+                    new CoerceValueCallback(CourceAge)),
+                new ValidateValueCallback(ValidateAge)
+                );
         }
 
         private static bool ValidateAge(object value)
         {
-            int v = (int)value;
-            if (v >= 0 && v <= 200)
-                return true;
-            else
-                return false;
+            int v = (int) value;
+            return (v >= 0 && v <= 200);
         }
 
-        private static object CoerceAge(DependencyObject d, object baseValue)
+        private static object CourceAge(DependencyObject d, object basevalue)
         {
-            int v = (int)baseValue;
-            if (v >= 0)
-                return v;
-            else
+            int v = (int)basevalue;
+            if (v < 0)
                 return 0;
+            return v;
         }
 
+        public Person(string name, int age)
+        {
+            this.Name = name;
+            this.Age = age;
+        }
         public string Print()
         {
             return $"{Name} {Age}";

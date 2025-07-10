@@ -19,8 +19,8 @@ namespace Example_02
         // 2. Обертка для удобного доступа
         public int ClickCount
         {
-            get { return (int)GetValue(ClickCountProperty); }
-            set { SetValue(ClickCountProperty, value); }
+            get => (int)GetValue(ClickCountProperty); 
+            set => SetValue(ClickCountProperty, value); 
         }
 
         // 3. Колбэк при изменении счетчика
